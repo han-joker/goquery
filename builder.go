@@ -1,225 +1,219 @@
 package goquery
 
-type Builder struct {
-
+// -- 构造查询 --
+func (q *Query) Table() *Query {
+	return q
 }
 
-func newBuilder() *Builder {
-	return &Builder{}
+func (q *Query) Select() *Query {
+	return q
 }
 
-func (b *Builder) Table() *Builder {
-	return b
+func (q *Query) AddSelect() *Query {
+	return q
 }
 
-func (b *Builder) Select() *Builder {
-	return b
+func (q *Query) Join() *Query {
+	return q
 }
 
-func (b *Builder) AddSelect() *Builder {
-	return b
+func (q *Query) LeftJoin() *Query {
+	return q
 }
 
-func (b *Builder) Join() *Builder {
-	return b
+func (q *Query) RightJoin() *Query {
+	return q
 }
 
-func (b *Builder) LeftJoin() *Builder {
-	return b
+func (q *Query) JoinSub() *Query {
+	return q
 }
 
-func (b *Builder) RightJoin() *Builder {
-	return b
+func (q *Query) CrossJoin() *Query {
+	return q
 }
 
-func (b *Builder) JoinSub() *Builder {
-	return b
+func (q *Query) Where() *Query {
+	return q
 }
 
-func (b *Builder) CrossJoin() *Builder {
-	return b
+func (q *Query) OrWhere() *Query {
+	return q
 }
 
-func (b *Builder) Where() *Builder {
-	return b
+func (q *Query) WhereBetween() *Query {
+	return q
 }
 
-func (b *Builder) OrWhere() *Builder {
-	return b
+func (q *Query) WhereNotBetween() *Query {
+	return q
 }
 
-func (b *Builder) WhereBetween() *Builder {
-	return b
+func (q *Query) OrWhereBetween() *Query {
+	return q
 }
 
-func (b *Builder) WhereNotBetween() *Builder {
-	return b
+func (q *Query) OrWhereNotBetween() *Query {
+	return q
 }
 
-func (b *Builder) OrWhereBetween() *Builder {
-	return b
+func (q *Query) WhereIn() *Query {
+	return q
 }
 
-func (b *Builder) OrWhereNotBetween() *Builder {
-	return b
+func (q *Query) WhereNotIn() *Query {
+	return q
 }
 
-func (b *Builder) WhereIn() *Builder {
-	return b
+func (q *Query) OrWhereIn() *Query {
+	return q
 }
 
-func (b *Builder) WhereNotIn() *Builder {
-	return b
+func (q *Query) OrWhereNotIn() *Query {
+	return q
 }
 
-func (b *Builder) OrWhereIn() *Builder {
-	return b
+func (q *Query) WhereNull() *Query {
+	return q
 }
 
-func (b *Builder) OrWhereNotIn() *Builder {
-	return b
+func (q *Query) WhereNotNull() *Query {
+	return q
 }
 
-func (b *Builder) WhereNull() *Builder {
-	return b
+func (q *Query) OrWhereNull() *Query {
+	return q
 }
 
-func (b *Builder) WhereNotNull() *Builder {
-	return b
+func (q *Query) OrWhereNotNull() *Query {
+	return q
 }
 
-func (b *Builder) OrWhereNull() *Builder {
-	return b
+func (q *Query) WhereDate() *Query {
+	return q
 }
 
-func (b *Builder) OrWhereNotNull() *Builder {
-	return b
+func (q *Query) WhereMonth() *Query {
+	return q
 }
 
-func (b *Builder) WhereDate() *Builder {
-	return b
+func (q *Query) WhereDay() *Query {
+	return q
 }
 
-func (b *Builder) WhereMonth() *Builder {
-	return b
+func (q *Query) WhereYear() *Query {
+	return q
 }
 
-func (b *Builder) WhereDay() *Builder {
-	return b
+func (q *Query) WhereTime() *Query {
+	return q
 }
 
-func (b *Builder) WhereYear() *Builder {
-	return b
+func (q *Query) WhereColumn() *Query {
+	return q
 }
 
-func (b *Builder) WhereTime() *Builder {
-	return b
+func (q *Query) OrWhereColumn() *Query {
+	return q
 }
 
-func (b *Builder) WhereColumn() *Builder {
-	return b
+func (q *Query) WhereExists() *Query {
+	return q
 }
 
-func (b *Builder) OrWhereColumn() *Builder {
-	return b
+func (q *Query) WhereJsonContains() *Query {
+	return q
 }
 
-func (b *Builder) WhereExists() *Builder {
-	return b
+func (q *Query) WhereJsonLength() *Query {
+	return q
 }
 
-func (b *Builder) WhereJsonContains() *Builder {
-	return b
+func (q *Query) OrderBy() *Query {
+	return q
 }
 
-func (b *Builder) WhereJsonLength() *Builder {
-	return b
+func (q *Query) Latest() *Query {
+	return q
 }
 
-func (b *Builder) OrderBy() *Builder {
-	return b
+func (q *Query) Oldest() *Query {
+	return q
 }
 
-func (b *Builder) Latest() *Builder {
-	return b
+func (q *Query) InRandomOrder() *Query {
+	return q
 }
 
-func (b *Builder) Oldest() *Builder {
-	return b
+func (q *Query) Reorder() *Query {
+	return q
 }
 
-func (b *Builder) InRandomOrder() *Builder {
-	return b
+func (q *Query) GroupBy() *Query {
+	return q
 }
 
-func (b *Builder) Reorder() *Builder {
-	return b
+func (q *Query) Having() *Query {
+	return q
 }
 
-func (b *Builder) GroupBy() *Builder {
-	return b
+func (q *Query) Limit() *Query {
+	return q
 }
 
-func (b *Builder) Having() *Builder {
-	return b
+func (q *Query) Offset() *Query {
+	return q
 }
 
-func (b *Builder) Limit() *Builder {
-	return b
+func (q *Query) Skip() *Query {
+	return q
 }
 
-func (b *Builder) Offset() *Builder {
-	return b
+func (q *Query) Take() *Query {
+	return q
 }
 
-func (b *Builder) Skip() *Builder {
-	return b
+func (q *Query) When() *Query {
+	return q
 }
 
-func (b *Builder) Take() *Builder {
-	return b
+func (q *Query) SelectRaw() *Query {
+	return q
 }
 
-func (b *Builder) When() *Builder {
-	return b
+func (q *Query) WhereRaw() *Query {
+	return q
 }
 
-func (b *Builder) SelectRaw() *Builder {
-	return b
+func (q *Query) OrWhereRaw() *Query {
+	return q
 }
 
-func (b *Builder) WhereRaw() *Builder {
-	return b
+func (q *Query) HavingRaw() *Query {
+	return q
 }
 
-func (b *Builder) OrWhereRaw() *Builder {
-	return b
+func (q *Query) OrHavingRaw() *Query {
+	return q
 }
 
-func (b *Builder) HavingRaw() *Builder {
-	return b
+func (q *Query) OrderByRaw() *Query {
+	return q
 }
 
-func (b *Builder) OrHavingRaw() *Builder {
-	return b
+func (q *Query) GroupByRaw() *Query {
+	return q
 }
 
-func (b *Builder) OrderByRaw() *Builder {
-	return b
+func (q *Query) Union() *Query {
+	return q
 }
 
-func (b *Builder) GroupByRaw() *Builder {
-	return b
+func (q *Query) SharedLock() *Query {
+	return q
 }
 
-func (b *Builder) Union() *Builder {
-	return b
+func (q *Query) LockForUpdate() *Query {
+	return q
 }
 
-func (b *Builder) SharedLock() *Builder {
-	return b
-}
-
-func (b *Builder) LockForUpdate() *Builder {
-	return b
-}

@@ -6,8 +6,6 @@ import (
 )
 
 type Query struct {
-	// query-builder
-	*Builder
 	// pool of idle connections
 	db *sql.DB
 	// The last query
@@ -28,28 +26,27 @@ func New(DSN string) (*Query, error) {
 	// DAO 对象
 	return &Query{
 		db:   db,
-		Builder: newBuilder(),
 		mode: defaultMode,
 	}, nil
 }
 
 // Ping verifies a connection to the database is still alive, establishing a connection if necessary.
-func (dao *Query) Ping() error {
-	return dao.db.Ping()
+func (q *Query) Ping() error {
+	return q.db.Ping()
 }
 
 // Exec executes a query without returning any rows.
-func (dao *Query) Exec(query string, args ...interface{}) (sql.Result, error) {
-	if dao.mode | DEV > 0 {
+func (q *Query) Exec(query string, args ...interface{}) (sql.Result, error) {
+	if q.mode | DEV > 0 {
 		log.Println(query, args)
 	}
-	return dao.db.Exec(query, args...)
+	return q.db.Exec(query, args...)
 }
 
 // Query executes a query that returns rows, typically a SELECT. The args are for any placeholder parameters in the query.
-func (dao *Query) Query(query string, args ...interface{}) ([]map[string]string, error) {
+func (q *Query) Query(query string, args ...interface{}) ([]map[string]string, error) {
 	// # 执行 SQL
-	rows, err := dao.db.Query(query, args...)
+	rows, err := q.db.Query(query, args...)
 	if err != nil {
 		return nil, err
 	}
@@ -95,86 +92,86 @@ func (dao *Query) Query(query string, args ...interface{}) ([]map[string]string,
 	return records, nil
 }
 
-func (dao *Query) Insert(value map[string]interface{}) {
+func (q *Query) Insert(value map[string]interface{}) {
 }
 
-func (dao *Query) InsertOrIgnore() {
+func (q *Query) InsertOrIgnore() {
 }
 
-func (dao *Query) InsertGetId() {
+func (q *Query) InsertGetId() {
 }
 
-func (dao *Query) Update() {
+func (q *Query) Update() {
 }
 
-func (dao *Query) UpdateOrInsert() {
+func (q *Query) UpdateOrInsert() {
 }
 
-func (dao *Query) Increment() {
+func (q *Query) Increment() {
 }
 
-func (dao *Query) Decrement() {
+func (q *Query) Decrement() {
 }
 
-func (dao *Query) Delete() {
+func (q *Query) Delete() {
 }
 
-func (dao *Query) Truncate() {
+func (q *Query) Truncate() {
 }
 
-func (dao *Query) Replace() {
+func (q *Query) Replace() {
 }
 
-func (dao *Query) Get() {
-
-}
-
-func (dao *Query) First() {
+func (q *Query) Get() {
 
 }
 
-func (dao *Query) Value() {
+func (q *Query) First() {
 
 }
 
-func (dao *Query) Find() {
+func (q *Query) Value() {
 
 }
 
-func (dao *Query) Pluck() {
+func (q *Query) Find() {
 
 }
 
-func (dao *Query) Chunk() {
+func (q *Query) Pluck() {
 
 }
-func (dao *Query) Count() {
+
+func (q *Query) Chunk() {
+
+}
+func (q *Query) Count() {
 }
 
-func (dao *Query) Sum() {
+func (q *Query) Sum() {
 }
 
-func (dao *Query) Avg() {
+func (q *Query) Avg() {
 }
 
-func (dao *Query) Min() {
+func (q *Query) Min() {
 }
 
-func (dao *Query) Max() {
+func (q *Query) Max() {
 }
 
-func (dao *Query) GroupConcat() {
+func (q *Query) GroupConcat() {
 }
 
-func (dao *Query) Exists() {
+func (q *Query) Exists() {
 }
 
-func (dao *Query) DoesntExists() {
+func (q *Query) DoesntExists() {
 }
 
-func (dao *Query) LastQuery() string {
-	return dao.lastQuery
+func (q *Query) LastQuery() string {
+	return q.lastQuery
 }
 
-func (dao *Query) Dump() {
+func (q *Query) Dump() {
 }
