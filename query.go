@@ -3,6 +3,8 @@ package goquery
 import (
 	"database/sql"
 	"log"
+	"strings"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 type Query struct {
@@ -14,6 +16,10 @@ type Query struct {
 	lastErr error
 	// running mode
 	mode int
+
+	// builder
+	table string
+	whereCond Cond
 }
 
 // constructor
@@ -92,16 +98,61 @@ func (q *Query) Query(query string, args ...interface{}) ([]map[string]string, e
 	return records, nil
 }
 
-func (q *Query) Insert(value map[string]interface{}) {
+func (q *Query) Insert(row R) (sql.Result, error) {
+	query := "INSERT INTO"
+	query += " " + q.table
+
+	// 字段和值列表
+	fl := len(row)
+	fs := make([]string, fl)
+	phs := make([]string, fl)
+	vs := make([]interface{}, fl)
+	i := 0
+	for f, v := range row {
+		fs[i] = quoteField(f)
+		phs[i] = "?"
+		vs[i] = v
+		i ++
+	}
+	query += " (" + strings.Join(fs, ", ") + ")"
+	query += " VALUES (" + strings.Join(phs, ", ") + ")"
+	q.lastQuery = query
+	q.clearBuilder()
+	return q.Exec(query, vs...)
 }
 
-func (q *Query) InsertOrIgnore() {
+func (q *Query) InsertGetId(row R) (int64, error) {
+	r, err := q.Insert(row)
+	if err != nil {
+		return 0, err
+	}
+	return r.LastInsertId()
 }
 
-func (q *Query) InsertGetId() {
-}
+//func (q *Query) Inserts(rs RS) ([]sql.Result, error) {
+//
+//}
+//
+//func (q *Query) InsertsOrIgnore() {
+//}
 
-func (q *Query) Update() {
+func (q *Query) Update(row R) (sql.Result, error) {
+	query := "UPDATE"
+	query += " " + q.table
+
+	fl := len(row)
+	sets := make([]string, fl)
+	vs := make([]interface{}, fl)
+
+	i := 0
+	for f, v := range row {
+		sets[i] = quoteField(f) + " = ?"
+		vs[i] = v
+		i ++
+	}
+	query += " SET " + strings.Join(sets,", ")
+
+	return q.Exec(query, vs...)
 }
 
 func (q *Query) UpdateOrInsert() {

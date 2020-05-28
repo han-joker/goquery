@@ -1,7 +1,22 @@
 package goquery
 
+import (
+	"fmt"
+	"strings"
+)
+
 // -- 构造查询 --
-func (q *Query) Table() *Query {
+func (q *Query) clearBuilder() {
+	q.table = ""
+}
+
+
+func (q *Query) Table(tables ...string) *Query {
+	ts := make([]string, len(tables))
+	for i, t := range tables {
+		ts[i] = quoteTable(t)
+	}
+	q.table = strings.Join(ts, ", ")
 	return q
 }
 
@@ -33,7 +48,17 @@ func (q *Query) CrossJoin() *Query {
 	return q
 }
 
-func (q *Query) Where() *Query {
+func (q *Query) Where(field string, operator string, operand ...interface{}) *Query {
+
+	cond := Cond{
+		left: Field(field),
+		operator: CompareOp(operator),
+		right: operand,
+	}
+
+	// 合并条件
+	w := q.whereCond.mergeCond(cond, "and").stringify()
+	fmt.Println(w)
 	return q
 }
 
